@@ -1,0 +1,12 @@
+: cat
+    begin
+        # dup dup
+        0 !=
+        if
+            emit
+        endif
+        0 =
+    until
+;
+cat
+exit
