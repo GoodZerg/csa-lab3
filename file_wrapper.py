@@ -6,7 +6,7 @@ def wrf(filename, code):
     with open(filename, "w", encoding="utf-8") as file:
         buffer = []
         for instruction in code:
-            buffer.append(json.dumps(instruction))
+            buffer.append(json.dumps(instruction, indent=4))
         file.write("[" + ",\n".join(buffer) + "]")
 
 

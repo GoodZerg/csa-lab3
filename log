@@ -1255,7 +1255,7 @@
 [DEBUG]  TICK: 1248 SIGNAL: IRLatch.MEM     AR: 1   PC: 6    MC_ADR: 6   TOS: 32     Z: 0 N: 0 V: 0 DS: [26]
 [DEBUG]  TICK: 1249 SIGNAL: Instruction.INC AR: 1   PC: 6    MC_ADR: 6   TOS: 32     Z: 0 N: 0 V: 0 DS: [26]
 [DEBUG]  TICK: 1250 SIGNAL: MCAdrLatch.IR   AR: 46  PC: 6    MC_ADR: 6   TOS: 32     Z: 0 N: 0 V: 0 DS: [26]
-[DEBUG]  output: Hello, << 
+[DEBUG]  output: Hello, <<
 [DEBUG]  TICK: 1251 SIGNAL: IOLatch.EMIT    AR: 46  PC: 6    MC_ADR: 6   TOS: 32     Z: 0 N: 0 V: 0 DS: [26]
 [DEBUG]  TICK: 1252 SIGNAL: MCAdrLatch.INC  AR: 47  PC: 6    MC_ADR: 6   TOS: 32     Z: 0 N: 0 V: 0 DS: [26]
 [DEBUG]  TICK: 1253 SIGNAL: BRLatch.DS      AR: 47  PC: 6    MC_ADR: 6   TOS: 32     Z: 0 N: 0 V: 0 DS: []
@@ -2602,5 +2602,5 @@
 [DEBUG]  TICK: 2588 SIGNAL: Instruction.INC AR: 1   PC: 18   MC_ADR: 18  TOS: 32     Z: 0 N: 0 V: 0 DS: []
 [DEBUG]  TICK: 2589 SIGNAL: MCAdrLatch.IR   AR: 49  PC: 18   MC_ADR: 18  TOS: 32     Z: 0 N: 0 V: 0 DS: []
 [DEBUG]  TICK: 2590 SIGNAL: Instruction.INC AR: 49  PC: 18   MC_ADR: 18  TOS: 32     Z: 0 N: 0 V: 0 DS: []
-[DEBUG]  out: 
+[DEBUG]  out:
 				Hello, World!
