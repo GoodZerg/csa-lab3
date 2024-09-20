@@ -1,12 +1,25 @@
-: cat
+: sum-multiples
+    one @
+    one @
     begin
-        # dup dup
-        0 !=
+        dup 3 mod 0 =
         if
-            emit
+            +
+        else
+            dup 5 mod 0 =
+            if
+                +
+            endif
         endif
-        0 =
+        1 +
+
+        dup 1000 <
     until
+    drop
 ;
-cat
+
+1 one !
+
+sum-multiples .
+
 exit

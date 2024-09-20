@@ -20,3 +20,12 @@ def rdf(filename):
         if "term" in instruction:
             instruction["term"] = Term(instruction["term"][0], instruction["term"][1], instruction["term"][2])
     return code
+
+
+def rd_input(filename):
+    with open(filename, encoding="utf-8") as file:
+        raw = file.read().strip()
+        input_token = []
+        for char in raw:
+            input_token.append(char)
+    return input_token
