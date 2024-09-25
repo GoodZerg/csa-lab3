@@ -5,7 +5,7 @@ from utils import *
 from file_wrapper import *
 
 
-'''TODO JSON_BY_OPCODE'''
+"""TODO JSON_BY_OPCODE"""
 
 
 def translate_string(name, it):
@@ -49,7 +49,7 @@ def translate_string(name, it):
 
 def translate(text):
     """
-        Translate text to machines code
+    Translate text to machines code
     """
     strings = []
     terms = parse_terms(text)
@@ -64,7 +64,9 @@ def translate(text):
             jmp_stack.append(count)
         elif words[0] == "else":
             if_index = jmp_stack.pop()
-            machine_code[if_index] = json_by_term(if_index, Opcode.JZS.value, count + 1, terms[if_index])
+            machine_code[if_index] = json_by_term(
+                if_index, Opcode.JZS.value, count + 1, terms[if_index]
+            )
             machine_code.append(None)
             jmp_stack.append(count)
             else_flag = True
@@ -72,9 +74,13 @@ def translate(text):
             if_index = jmp_stack.pop()
             count -= 1
             if else_flag:
-                machine_code[if_index] = json_by_opcode(if_index, Opcode.JMP.value, count + 1)
+                machine_code[if_index] = json_by_opcode(
+                    if_index, Opcode.JMP.value, count + 1
+                )
             else:
-                machine_code[if_index] = json_by_opcode(if_index, Opcode.JZS.value, count + 1)
+                machine_code[if_index] = json_by_opcode(
+                    if_index, Opcode.JZS.value, count + 1
+                )
         elif words[0] == "begin":
             jmp_stack.append(count)
             count -= 1
@@ -85,25 +91,54 @@ def translate(text):
             machine_code.append(json_by_term(count, Opcode.PUSH.value, words[0], term))
         elif words[0] in variable_names:
             if len(words) == 5:
-                machine_code.append(json_by_term(count, Opcode.ADDR_ON_TOP.value, variable_names[words[1]],
-                                                 Term(term.line, 2, words[1])))
+                machine_code.append(
+                    json_by_term(
+                        count,
+                        Opcode.ADDR_ON_TOP.value,
+                        variable_names[words[1]],
+                        Term(term.line, 2, words[1]),
+                    )
+                )
                 count += 1
-                machine_code.append(json_by_term_noarg(count, Opcode.VAR_ON_TOP.value, Term(term.line, 3, words[2])))
+                machine_code.append(
+                    json_by_term_noarg(
+                        count, Opcode.VAR_ON_TOP.value, Term(term.line, 3, words[2])
+                    )
+                )
                 count += 1
-                machine_code.append(json_by_term(count, Opcode.ADDR_ON_TOP.value, variable_names[words[0]],
-                                                 Term(term.line, 1, words[0])))
+                machine_code.append(
+                    json_by_term(
+                        count,
+                        Opcode.ADDR_ON_TOP.value,
+                        variable_names[words[0]],
+                        Term(term.line, 1, words[0]),
+                    )
+                )
                 count += 1
-                machine_code.append(json_by_term_noarg(count, Opcode.SUM.value, Term(term.line, 4, words[3])))
+                machine_code.append(
+                    json_by_term_noarg(
+                        count, Opcode.SUM.value, Term(term.line, 4, words[3])
+                    )
+                )
                 count += 1
                 if words[4] == "!":
                     machine_code.append(
-                        json_by_term_noarg(count, Opcode.SAVE_VAR, Term(term.line, 5, words[4])))
+                        json_by_term_noarg(
+                            count, Opcode.SAVE_VAR, Term(term.line, 5, words[4])
+                        )
+                    )
                 else:
                     machine_code.append(
-                        json_by_term_noarg(count, Opcode.VAR_ON_TOP.value, Term(term.line, 5, words[4])))
+                        json_by_term_noarg(
+                            count, Opcode.VAR_ON_TOP.value, Term(term.line, 5, words[4])
+                        )
+                    )
             else:
                 machine_code.append(
-                    json_by_term(count, Opcode.ADDR_ON_TOP.value, variable_names[words[0]], term))
+                    json_by_term(
+                        count, Opcode.ADDR_ON_TOP.value, variable_names[words[0]], term
+                    )
+                )
         elif words[0] == '."':
             strings.append(str(" ".join(words)[3:-1]))
             massive, plus_count = translate_string(str(" ".join(words)[3:-1]), count)
@@ -133,7 +168,7 @@ def main(source, target):
     wrf(target, code)
     variable_names.clear()
     vars_count.clear()
-    print(f'OK.')
+    print(f"OK.")
 
 
 if __name__ == "__main__":

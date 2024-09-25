@@ -18,7 +18,9 @@ def rdf(filename):
             instruction["opcode"] = Opcode(instruction["opcode"])
 
         if "term" in instruction:
-            instruction["term"] = Term(instruction["term"][0], instruction["term"][1], instruction["term"][2])
+            instruction["term"] = Term(
+                instruction["term"][0], instruction["term"][1], instruction["term"][2]
+            )
     return code
 
 

@@ -3,24 +3,24 @@ from opcodes import Opcode
 
 def word2opcode(word):
     return {
-        "+":    Opcode.SUM.value,
-        "-":    Opcode.SUB.value,
-        "*":    Opcode.MUL.value,
-        "/":    Opcode.DIV.value,
-        "mod":  Opcode.MOD.value,
-        "dup":  Opcode.DUP.value,
+        "+": Opcode.SUM.value,
+        "-": Opcode.SUB.value,
+        "*": Opcode.MUL.value,
+        "/": Opcode.DIV.value,
+        "mod": Opcode.MOD.value,
+        "dup": Opcode.DUP.value,
         "drop": Opcode.DROP.value,
         "swap": Opcode.SWAP.value,
-        "=":    Opcode.EQ.value,
-        ">":    Opcode.MORE.value,
-        "<":    Opcode.LESS.value,
-        ".":    Opcode.PRINT.value,
+        "=": Opcode.EQ.value,
+        ">": Opcode.MORE.value,
+        "<": Opcode.LESS.value,
+        ".": Opcode.PRINT.value,
         "exit": Opcode.HALT.value,
-        "!":    Opcode.SAVE_VAR.value,
-        "@":    Opcode.VAR_ON_TOP.value,
-        "#":    Opcode.READ.value,
+        "!": Opcode.SAVE_VAR.value,
+        "@": Opcode.VAR_ON_TOP.value,
+        "#": Opcode.READ.value,
         "emit": Opcode.EMIT.value,
-        "!=":   Opcode.NOT_EQ.value,
+        "!=": Opcode.NOT_EQ.value,
     }.get(word)
 
 
@@ -34,7 +34,9 @@ def is_number(word):
 
 
 def exception_by_lex(text, line, column, word):
-    raise Exception("Error in [" + str(line) + ", " + str(column) + ", " + word + " ]:" + text)
+    raise Exception(
+        "Error in [" + str(line) + ", " + str(column) + ", " + word + " ]:" + text
+    )
 
 
 def exception_noarg(text):
@@ -59,4 +61,3 @@ def json_by_term(it, opcode, arg, term):
 
 def json_by_term_noarg(it, opcode, term):
     return {"index": it, "opcode": opcode, "term": term}
-

@@ -92,10 +92,15 @@ class DP:
         self.tos_l = {
             TosLatch.ALU: lambda: self.set_top_of_stack(self.alu.value),
             TosLatch.BR: lambda: self.set_top_of_stack(self.buffer_register),
-            TosLatch.MEM: lambda: self.set_top_of_stack(self.memory.memory[self.address_register]),
-            TosLatch.IR: lambda: self.set_top_of_stack(int(self.instruction_register["arg"])),
-            TosLatch.IR_VAR: lambda: self.set_top_of_stack(int(self.instruction_register["arg"]) +
-                                                           self.memory.start_of_variables),
+            TosLatch.MEM: lambda: self.set_top_of_stack(
+                self.memory.memory[self.address_register]
+            ),
+            TosLatch.IR: lambda: self.set_top_of_stack(
+                int(self.instruction_register["arg"])
+            ),
+            TosLatch.IR_VAR: lambda: self.set_top_of_stack(
+                int(self.instruction_register["arg"]) + self.memory.start_of_variables
+            ),
         }
         self.pc_l = {
             PCLatch.IR: lambda: self.set_pc(self.instruction_register["arg"]),
@@ -133,10 +138,10 @@ class DP:
         }
 
     def execute(self, signal):
-        '''print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        """print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         print(signal)
         print(type(signal))
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")'''
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")"""
         # print(self.signal_handler.get(type(signal)))
         self.signal_handler.get(type(signal)).get(signal)()
 
@@ -179,7 +184,9 @@ class DP:
 
     def print(self):
         self.output_buffer.append(str(self.top_of_stack))
-        logging.debug("output: " + "".join(self.output_buffer) + "<<" + str(self.top_of_stack))
+        logging.debug(
+            "output: " + "".join(self.output_buffer) + "<<" + str(self.top_of_stack)
+        )
 
     def read(self):
         if len(self.input_buffer) == 0:
@@ -191,7 +198,9 @@ class DP:
 
     def emit(self):
         self.output_buffer.append(chr(self.top_of_stack))
-        logging.debug("output: " + "".join(self.output_buffer) + "<<" + chr(self.top_of_stack))
+        logging.debug(
+            "output: " + "".join(self.output_buffer) + "<<" + chr(self.top_of_stack)
+        )
 
     def jmpz(self):
         if self.alu.z_flag == 1:

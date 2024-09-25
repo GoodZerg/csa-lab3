@@ -37,3 +37,4 @@ class Opcode(str, Enum):
 class Term(namedtuple("Term", "line word symbol")):
     """Описание символов из текста программы в виде (строка номер_в_строке символ)"""
 
+    pass

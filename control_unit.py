@@ -105,9 +105,11 @@ class CU:
         self.tick = 0
         self.instruction_count = 0
         self.mc_adr_l = {
-            MCAdrLatch.IR: lambda: self.set_adr(opcode2microcode(self.datapath.instruction_register["opcode"])),
+            MCAdrLatch.IR: lambda: self.set_adr(
+                opcode2microcode(self.datapath.instruction_register["opcode"])
+            ),
             MCAdrLatch.INC: lambda: self.mc_adr_inc(),
-            MCAdrLatch.ZERO: lambda: self.set_adr(0)
+            MCAdrLatch.ZERO: lambda: self.set_adr(0),
         }
 
     def __repr__(self, signal):
@@ -119,7 +121,9 @@ class CU:
             str(self.mc_adr),
             str(self.datapath.pc),
             str(self.datapath.address_register),
-            str(self.datapath.top_of_stack) if self.datapath.top_of_stack is not None else "0",
+            str(self.datapath.top_of_stack)
+            if self.datapath.top_of_stack is not None
+            else "0",
             str(self.datapath.alu.z_flag),
             str(self.datapath.alu.n_flag),
             str(self.datapath.alu.v_flag),
@@ -152,11 +156,11 @@ class CU:
         self.mc_adr = data
 
     def mc_adr_latch(self, signal):
-        '''print("------------------------------------------------------------------------------------------------")
+        """print("------------------------------------------------------------------------------------------------")
         print(self.mc_adr)
         print(signal)
         print(self.mc_adr_l[signal])
-        print("------------------------------------------------------------------------------------------------")'''
+        print("------------------------------------------------------------------------------------------------")"""
         self.mc_adr_l[signal]()
 
     def run_machine(self):
@@ -169,7 +173,7 @@ class CU:
             pass
         output = ""
         for string in "".join(self.datapath.output_buffer).split("\n"):
-            tab = '\t'
+            tab = "\t"
             output += f"{4 * tab}{string}\n"
         logging.debug("out: \n" + output[0:-1])
         return self.datapath.output_buffer, self.instruction_count, self.tick

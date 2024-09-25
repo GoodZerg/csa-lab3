@@ -33,19 +33,19 @@ vars_count = []
 
 def parse_terms(text):
     """
-        Transform input to list of terms
+    Transform input to list of terms
     """
     var_counter = 1
     terms = []
-    
+
     procedures = {}
     procedure_name = ""
     is_procedure = False
     need_procedure_name = False
-    
+
     branch_stack = 0
     loop_stack = 0
-    
+
     for line_num, line in enumerate(text.split("\n"), 1):
         if line != "":
             line_words = line.strip().split(" ")
@@ -56,7 +56,9 @@ def parse_terms(text):
                     need_procedure_name = False
                 elif is_number(word) or word in operator:
                     if is_procedure:
-                        procedures[procedure_name].append(Term(line_num, word_num, word))
+                        procedures[procedure_name].append(
+                            Term(line_num, word_num, word)
+                        )
                     else:
                         terms.append(Term(line_num, word_num, word))
                 elif word == "buffer":
@@ -74,23 +76,41 @@ def parse_terms(text):
                             is_procedure = True
                             need_procedure_name = True
                         else:
-                            exception_by_lex("nested procedure", line_num, word_num, word)
+                            exception_by_lex(
+                                "nested procedure", line_num, word_num, word
+                            )
                     else:
                         if branch_stack == 0:
-                            exception_by_lex("procedure in branch", line_num, word_num, word)
+                            exception_by_lex(
+                                "procedure in branch", line_num, word_num, word
+                            )
                         if loop_stack == 0:
-                            exception_by_lex("procedure in loop", line_num, word_num, word)
+                            exception_by_lex(
+                                "procedure in loop", line_num, word_num, word
+                            )
                 elif word == ";":
                     if branch_stack == 0 and loop_stack == 0:
                         if is_procedure:
                             is_procedure = False
                         else:
-                            exception_by_lex("cannot end procedure", line_num, word_num, word)
+                            exception_by_lex(
+                                "cannot end procedure", line_num, word_num, word
+                            )
                     else:
                         if branch_stack == 0:
-                            exception_by_lex("need closing branch before end procedure", line_num, word_num, word)
+                            exception_by_lex(
+                                "need closing branch before end procedure",
+                                line_num,
+                                word_num,
+                                word,
+                            )
                         if loop_stack == 0:
-                            exception_by_lex("need closing loop before end procedure", line_num, word_num, word)
+                            exception_by_lex(
+                                "need closing loop before end procedure",
+                                line_num,
+                                word_num,
+                                word,
+                            )
                 elif word in procedures.keys():
                     for procedure_term in procedures[word]:
                         terms.append(procedure_term)
@@ -104,12 +124,16 @@ def parse_terms(text):
                                 vars_count.append(word)
                                 var_counter += 1
                             if is_procedure:
-                                procedures[procedure_name].append(Term(line_num, word_num, word))
+                                procedures[procedure_name].append(
+                                    Term(line_num, word_num, word)
+                                )
                             else:
                                 terms.append(Term(line_num, word_num, word))
                         if len(line_words) == 5:
                             if is_procedure:
-                                procedures[procedure_name].append(Term(line_num, word_num, line.strip()))
+                                procedures[procedure_name].append(
+                                    Term(line_num, word_num, line.strip())
+                                )
                                 break
                             terms.append(Term(line_num, word_num, line.strip()))
                             break
