@@ -168,7 +168,7 @@ def main(source, target):
     wrf(target, code)
     variable_names.clear()
     vars_count.clear()
-    print(f"OK.")
+    print("OK.")
 
 
 if __name__ == "__main__":
