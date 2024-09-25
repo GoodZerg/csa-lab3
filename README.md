@@ -148,7 +148,7 @@ __Форма Бэкуса-Наура:__
 
 ### Модель процессора
 
-Интерфейс командной строки: `machine.py <machine_code_file> <input_file> <log_file>`
+Интерфейс командной строки: `.\vm.py <machine_code_file> <input_file> <log_file>`
 
 #### DataPath
 
