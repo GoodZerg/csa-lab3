@@ -34,79 +34,58 @@ def opcode2microcode(opcode):
 
 
 microcode = [
-    # Fetch next Instruction - 0
+    # Fetch next Instruction
     [ARLatch.PC, MEMSignal.READ, MCAdrLatch.INC],
     [IRLatch.MEM, Instruction.INC, MCAdrLatch.IR],
-    # SUM - 2
+    #  Microcode Table
     [ALUValues.VAR, AluLatch.SUM, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # SUB - 4
     [ALUValues.VAR, AluLatch.SUB, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # MUL - 6
     [ALUValues.VAR, AluLatch.MUL, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # DIV - 8
     [ALUValues.VAR, AluLatch.DIV, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # MOD - 10
     [ALUValues.VAR, AluLatch.MOD, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # DUP - 12
     [DSLatch.Push, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # DROP - 14
     [DSLatch.Pop, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # SWAP - 16
     [BRLatch.DS, MCAdrLatch.INC],
     [DSLatch.Push, TosLatch.BR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # EQ - 19
     [ALUValues.VAR, AluLatch.EQ, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # MORE - 21
     [ALUValues.VAR, AluLatch.MORE, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # LESS - 23
     [ALUValues.VAR, AluLatch.LESS, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # PUSH - 25
     [DSLatch.Push, TosLatch.IR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # ADR_ON_TOP - 27
     [DSLatch.Push, TosLatch.IR_VAR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # SAVE_VAR - 29
     [ARLatch.TOS, BRLatch.DS, TosLatch.BR, MEMSignal.TOS, MCAdrLatch.INC],
     [MEMSignal.WRITE, BRLatch.DS, TosLatch.BR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # VAR_ON_TOP - 32
     [ARLatch.TOS, MEMSignal.READ, MCAdrLatch.INC],
     [IRLatch.MEM, TosLatch.IR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # JZS - 35
     [DSLatch.Push, TosLatch.IR, JUMPS.JZS, MCAdrLatch.INC],
     [DSLatch.Pop, BRLatch.DS, TosLatch.BR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # JMP - 38
     [DSLatch.Push, TosLatch.IR, JUMPS.JMP, MCAdrLatch.INC],
     [BRLatch.DS, TosLatch.BR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # PRINT - 41
     [IOLatch.PRINT, MCAdrLatch.INC],
     [BRLatch.DS, TosLatch.BR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # READ - 44
     [DSLatch.Push, MCAdrLatch.INC],
     [IOLatch.READ, Instruction.INC, PCLatch.INC, MCAdrLatch.ZERO],
-    # EMIT - 46
     [IOLatch.EMIT, MCAdrLatch.INC],
     [BRLatch.DS, TosLatch.BR, MCAdrLatch.INC],
     [PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
-    # HALT - 49
     [Instruction.INC, PROG.HALT],
-    # NOT_EQ - 50
     [ALUValues.VAR, AluLatch.NOT_EQ, MCAdrLatch.INC],
     [TosLatch.ALU, PCLatch.INC, Instruction.INC, MCAdrLatch.ZERO],
 ]

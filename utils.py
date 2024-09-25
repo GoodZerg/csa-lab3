@@ -1,4 +1,4 @@
-from opcode import Opcode
+from opcodes import Opcode
 
 
 def word2opcode(word):

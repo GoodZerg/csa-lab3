@@ -18,6 +18,7 @@ def main(file, input_f):
 
     output, inst_count, tick_count = control_unit.run_machine()
 
+    print(f"{''.join(output)}\n\ninstruction_count: {inst_count!s}\ntick: {tick_count!s}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

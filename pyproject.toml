@@ -7,12 +7,20 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest-golden = "^0.2.2"
+pytest = "^8.3.3"
+mypy = "^1.11.2"
+ruff = "^0.6.7"
+coverage = "^7.6.1"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
-pytest-regressions = "^2.5.0"
+pytest-golden = "^0.2.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+enable_assertion_pass_hook = true

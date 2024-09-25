@@ -1,4 +1,4 @@
-from opcode import *
+from opcodes import *
 from utils import *
 
 operator = {

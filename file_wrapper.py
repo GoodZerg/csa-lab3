@@ -1,5 +1,5 @@
 import json
-from opcode import *
+from opcodes import *
 
 
 def wrf(filename, code):

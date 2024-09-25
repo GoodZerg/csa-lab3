@@ -1,0 +1,45 @@
+0 sum !
+1 iter !
+
+1 one !
+3 three !
+5 five !
+0 zero !
+
+999 max_iter !
+
+: solve
+    begin
+        three @
+        iter @
+        mod
+        five @
+        iter @
+        mod
+        *
+        zero @
+        =
+        if
+            sum @
+            iter @
+            +
+            sum !
+        endif
+        drop
+
+        one @
+        iter @
+        +
+        iter !
+
+        iter @
+        max_iter @
+        >
+    until
+;
+
+solve
+
+sum @
+.
+exit
